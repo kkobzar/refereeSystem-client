@@ -8,6 +8,18 @@
   </div>
 </template>
 
+<script>
+import { mapGetters } from "vuex";
+// import Login from "@/components/Login";
+export default {
+  components: {},
+  name: "app",
+  computed: {
+    ...mapGetters(["isLogged"]),
+  },
+};
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
