@@ -7,28 +7,30 @@
       <input type="password" name="password" id="password" v-model="password" />
       <input type="submit" value="Login">
     </form>
+    <div v-if="errors" class="errors">{{ errors }}</div>
+    <router-link to="registration">Registration</router-link>
   </div>
 </template>
 
 <script>
+import userService from "@/services/userService";
 export default {
   name: "Login",
   data(){
     return {
       email: "",
       password: "",
+      errors: "",
+      loading: false,
     }
   },
   methods: {
     async login() {
-      await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...this.$data }),
-      });
+      this.loading = true
+      const res = await userService.login(this.email,this.password)
+      this.errors = res.message;
+      this.loading = false
+      setTimeout(() => (this.errors = ""), 5000);
     },
   }
 };

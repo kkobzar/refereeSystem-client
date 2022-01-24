@@ -1,32 +1,57 @@
 <template>
   <div id="registration">
-    <form @submit.prevent="login">
+    <form @submit.prevent="registration">
+      <label for="name">Name</label>
+      <input v-model="name" id="name" name="name" />
+      <label for="surname">Surname</label>
+      <input v-model="surname" id="surname" name="surname" />
       <label for="email">Email</label>
       <input v-model="email" id="email" name="email" />
       <label for="password">Password</label>
       <input type="password" name="password" id="password" v-model="password" />
-      <input type="submit" value="Login" />
+      <label for="passwordConfirm">Confirm password</label>
+      <input
+        type="password"
+        name="passwordConfirm"
+        id="passwordConfirm"
+        v-model="password"
+      />
+      <input type="submit" value="Register" />
     </form>
+    <div v-if="errors" class="errors">{{ errors }}</div>
+    <router-link to="login">Login</router-link>
   </div>
 </template>
 
 <script>
+import userService from "@/services/userService";
 export default {
   name: "Registration",
-  data(){
-    return{
+  data() {
+    return {
       email: "",
       password: "",
       passwordConfirm: "",
       name: "",
-      surname: ""
-    }
+      surname: "",
+      errors: "",
+    };
   },
-  methods:{
-    registration(){
-
-    }
-  }
+  methods: {
+    async registration() {
+      const res = await userService.register(
+        this.name,
+        this.surname,
+        this.email,
+        this.password,
+        this.passwordConfirm
+      );
+      if (res.errors && res.message) {
+        this.errors = res.message;
+        setTimeout(() => (this.message = ""), 5000);
+      }
+    },
+  },
 };
 </script>
 
