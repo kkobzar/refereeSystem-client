@@ -16,7 +16,7 @@
 import userService from "@/services/userService";
 export default {
   name: "Login",
-  data(){
+  data() {
     return {
       email: "",
       password: "",
@@ -26,10 +26,8 @@ export default {
   },
   methods: {
     async login() {
-      this.loading = true
       const res = await userService.login(this.email,this.password)
       this.errors = res.message;
-      this.loading = false
       setTimeout(() => (this.errors = ""), 5000);
     },
   }

@@ -1,31 +1,34 @@
-const headers = {
-  "Content-Type": "application/json",
-};
-const apiUrl = "http://localhost:5000";
+import $api from "../../http";
+import store from "@/store";
+
 export default {
   async login(email, password) {
-    return (
-      await fetch(apiUrl + "/api/auth/login", {
-        method: "POST",
-        mode: "cors",
-        headers,
-        body: JSON.stringify({ email, password }),
-      })
-    ).json();
+    let re = await $api.post("/auth/login", {
+      email,
+      password
+    });
+    if (re.status === 200) {
+      localStorage.setItem("token", re.data.accessToken);
+    }
+
+    await store.dispatch("loginUser",re.data.user)
+    console.log(re);
+    return re.data;
+
   },
   async register(name, surname, email, password, passwordConfirm) {
-    return (
-      await fetch(apiUrl + "/api/auth/register", {
-        method: "POST",
-        headers,
-        body: JSON.stringify({
-          name,
-          surname,
-          email,
-          password,
-          passwordConfirm,
-        }),
-      })
-    ).json();
+    const re = await $api.post("/auth/register", {
+      name,
+      surname,
+      email,
+      password,
+      passwordConfirm,
+    });
+
+    if (re.status === 200){
+      console.log(re);
+    }
+    return re.data;
+
   },
 };
