@@ -26,12 +26,6 @@ export default {
   },
   methods: {
     ...mapActions(['loginUser']),
-    async login() {
-      const res = await this.$store.actions.loginUser(this.email,this.password)
-      //const res = await
-      this.errors = res.message;
-      setTimeout(() => (this.errors = ""), 5000);
-    },
   }
 };
 </script>

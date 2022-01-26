@@ -5,11 +5,11 @@ export default {
     user: null,
   },
   mutations: {
-    login() {
-      this.state.isLogged = true;
+    login(state) {
+      state.isLogged = true;
     },
-    setUser(user) {
-      this.state.user = user;
+    setUser(state, { user }) {
+      state.user = user;
     },
   },
   actions: {
@@ -34,4 +34,12 @@ export default {
       commit("setUser", user.user)
     }
   },
+  getters: {
+    isLogged(state) {
+      return state.isLogged
+    },
+    getUser(state){
+      return state.user
+    }
+  }
 };

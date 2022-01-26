@@ -1,6 +1,6 @@
 <template>
   <div id="registration">
-    <form @submit.prevent="registration">
+    <form @submit.prevent="registerUser({name,surname,email,password,passwordConfirm})">
       <label for="name">Name</label>
       <input v-model="name" id="name" name="name" />
       <label for="surname">Surname</label>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import userService from "@/services/userService";
+import { mapActions } from "vuex";
 export default {
   name: "Registration",
   data() {
@@ -38,20 +38,7 @@ export default {
     };
   },
   methods: {
-    async registration() {
-      const res = await userService.register(
-        this.name,
-        this.surname,
-        this.email,
-        this.password,
-        this.passwordConfirm
-      );
-      console.log(res);
-      if (res.errors && res.message) {
-        this.errors = res.message;
-        setTimeout(() => (this.message = ""), 5000);
-      }
-    },
+    ...mapActions(["registerUser"]),
   },
 };
 </script>
