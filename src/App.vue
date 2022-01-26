@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <span>logged in: {{ isLogged }}</span> <br>
+      <span>logged in: {{ isLogged }}</span> <br>{{userInfo}}
     </div>
     <router-view />
   </div>
@@ -15,7 +15,7 @@ export default {
   components: {},
   name: "app",
   computed: {
-    ...mapGetters(["isLogged", "getUser"]),
+    ...mapGetters(["isLogged", "userInfo"]),
   },
 };
 </script>

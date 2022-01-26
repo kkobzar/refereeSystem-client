@@ -2,13 +2,13 @@ import userService from "@/services/userService";
 export default {
   state: {
     isLogged: false,
-    user: null,
+    user: {},
   },
   mutations: {
     login(state) {
       state.isLogged = true;
     },
-    setUser(state, { user }) {
+    setUser(state, user) {
       state.user = user;
     },
   },
@@ -30,16 +30,15 @@ export default {
         passwordConfirm
       );
       commit("login");
-      console.log(user);
-      commit("setUser", user.user)
+      commit("setUser", user.user);
     }
   },
   getters: {
     isLogged(state) {
-      return state.isLogged
+      return state.isLogged;
     },
-    getUser(state){
-      return state.user
+    userInfo(state){
+      return state.user;
     }
   }
 };
