@@ -1,6 +1,6 @@
 <template>
   <div id="login">
-    <form @submit.prevent="login">
+    <form @submit.prevent="loginUser({email,password})">
       <label for="email">Email</label>
       <input v-model="email" id="email" name="email"/>
       <label for="password">Password</label>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import userService from "@/services/userService";
+import { mapActions } from "vuex";
 export default {
   name: "Login",
   data() {
@@ -25,8 +25,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['loginUser']),
     async login() {
-      const res = await userService.login(this.email,this.password)
+      const res = await this.$store.actions.loginUser(this.email,this.password)
+      //const res = await
       this.errors = res.message;
       setTimeout(() => (this.errors = ""), 5000);
     },

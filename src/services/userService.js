@@ -1,7 +1,7 @@
 import $api from "../../http";
-import store from "@/store";
 
 export default {
+  //returns tokens and user data
   async login(email, password) {
     let re = await $api.post("/auth/login", {
       email,
@@ -11,8 +11,6 @@ export default {
       localStorage.setItem("token", re.data.accessToken);
     }
 
-    await store.dispatch("loginUser",re.data.user)
-    console.log(re);
     return re.data;
 
   },
