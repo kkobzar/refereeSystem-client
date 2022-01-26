@@ -23,9 +23,6 @@ export default {
       passwordConfirm,
     });
 
-    if (re.status === 200){
-      console.log(re);
-    }
     return re.data;
 
   },

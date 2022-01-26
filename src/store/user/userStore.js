@@ -18,6 +18,20 @@ export default {
       commit("login");
       commit("setUser", user.user);
     },
-    //async registerUser({commit},{name,surname,email,password,passwordConfirm})
+    async registerUser(
+      { commit },
+      { name, surname, email, password, passwordConfirm }
+    ) {
+      const user = await userService.register(
+        name,
+        surname,
+        email,
+        password,
+        passwordConfirm
+      );
+      commit("login");
+      console.log(user);
+      commit("setUser", user.user)
+    }
   },
 };

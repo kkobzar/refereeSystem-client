@@ -14,7 +14,7 @@
         type="password"
         name="passwordConfirm"
         id="passwordConfirm"
-        v-model="password"
+        v-model="passwordConfirm"
       />
       <input type="submit" value="Register" />
     </form>
@@ -46,6 +46,7 @@ export default {
         this.password,
         this.passwordConfirm
       );
+      console.log(res);
       if (res.errors && res.message) {
         this.errors = res.message;
         setTimeout(() => (this.message = ""), 5000);
