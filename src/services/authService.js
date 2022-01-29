@@ -26,4 +26,9 @@ export default {
     return re.data;
 
   },
+  async getAllUsers(){
+    const res = await $api.get("/core/users");
+
+    return res.data;
+  }
 };
