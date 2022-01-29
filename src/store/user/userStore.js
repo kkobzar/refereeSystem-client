@@ -1,4 +1,4 @@
-import userService from "@/services/userService";
+import userService from "@/services/authService";
 export default {
   state: {
     isLogged: false,
@@ -31,7 +31,7 @@ export default {
       );
       commit("login");
       commit("setUser", user.user);
-    }
+    },
   },
   getters: {
     isLogged(state) {
