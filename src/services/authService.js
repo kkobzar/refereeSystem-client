@@ -30,5 +30,5 @@ export default {
     const res = await $api.get("/core/users");
 
     return res.data;
-  }
+  },
 };
