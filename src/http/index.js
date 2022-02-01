@@ -5,10 +5,13 @@ const $api = axios.create({
   withCredentials: true,
   baseURL: apiUrl,
 });
+let user = localStorage.getItem("user");
+
 
 $api.interceptors.request.use((config) => {
-  if (localStorage.getItem("token") === null) return config;
-  config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
+  if (user === null) return config;
+  let token = JSON.parse(localStorage.getItem("user")).token
+  config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
@@ -25,13 +28,13 @@ $api.interceptors.response.use(
     ) {
       originalRequest._isRetry = true;
       try {
-        const response = await axios.get(`${apiUrl}/refresh`, {
+        const response = await axios.get(`${apiUrl}/auth/refresh`, {
           withCredentials: true,
         });
-        localStorage.setItem("token", response.data.accessToken);
+        localStorage.setItem("user", JSON.stringify({token:response.data.accessToken,user:response.data.user}));
         return $api.request(originalRequest);
       } catch (e) {
-        console.log("НЕ АВТОРИЗОВАН");
+        console.log("Unauthorized");
       }
     }
     throw error;

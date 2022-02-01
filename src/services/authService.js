@@ -9,7 +9,7 @@ export default {
     });
     if (re.status === 200) {
       // localStorage.setItem("token", re.data.accessToken);
-      localStorage.setItem("user", JSON.stringify(re.data));
+      localStorage.setItem("user", JSON.stringify({token: re.data.accessToken,user:re.data.user }));
     }
 
     return re.data;

@@ -1,6 +1,8 @@
 <template>
 <section id="all-users">
-
+  <ul>
+    <li v-for="user in users" :key="user.id">{{user.email}}</li>
+  </ul>
 </section>
 </template>
 

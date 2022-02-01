@@ -6,7 +6,7 @@ import Registration from "@/views/RegistrationView";
 
 Vue.use(VueRouter);
 
-const user = localStorage.getItem("user")
+const user = localStorage.getItem("user");
 
 const routes = [
   {
@@ -34,7 +34,8 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.authReq){
-    if (user) {
+    console.log(user);
+    if (!user) {
       next({ name: "Login" });
     }
   }

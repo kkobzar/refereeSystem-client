@@ -20,10 +20,10 @@ export default {
   methods: {
     ...mapActions(["setUser"]),
   },
-  created() {
+  /*created() {
     const setUser = { ...mapActions(["setUser"]) }
     setUser.setUser()
-  }
+  }*/
 };
 </script>
 

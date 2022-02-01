@@ -1,9 +1,12 @@
 import userService from "@/services/authService";
+
+const user = localStorage.getItem("user");
+const initState = user?{isLogged:true,user:JSON.parse(user).user}:{
+      isLogged: false,
+      user: {},
+    };
 export default {
-  state: {
-    isLogged: false,
-    user: {},
-  },
+  state: initState,
   mutations: {
     login(state) {
       state.isLogged = true;
