@@ -1,4 +1,4 @@
-import $api from "../../http";
+import $api from "@/http/index";
 
 export default {
   //returns tokens and user data
@@ -8,7 +8,8 @@ export default {
       password
     });
     if (re.status === 200) {
-      localStorage.setItem("token", re.data.accessToken);
+      // localStorage.setItem("token", re.data.accessToken);
+      localStorage.setItem("user", JSON.stringify(re.data));
     }
 
     return re.data;

@@ -32,6 +32,13 @@ export default {
       commit("login");
       commit("setUser", user.user);
     },
+    async setUser({ commit }) {
+      //check token first
+      if (localStorage.getItem("user")){
+        commit("login");
+        commit("setUser", JSON.parse(localStorage.getItem("user")))
+      }
+    }
   },
   getters: {
     isLogged(state) {

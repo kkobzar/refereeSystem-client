@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 // import Login from "@/components/Login";
 export default {
   components: {},
@@ -17,6 +17,13 @@ export default {
   computed: {
     ...mapGetters(["isLogged", "userInfo"]),
   },
+  methods: {
+    ...mapActions(["setUser"]),
+  },
+  created() {
+    const setUser = { ...mapActions(["setUser"]) }
+    setUser.setUser()
+  }
 };
 </script>
 
