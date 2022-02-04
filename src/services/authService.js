@@ -25,7 +25,10 @@ export default {
     });
 
     return re.data;
-
+  },
+  async logout() {
+    await $api.post('/auth/logout')
+    localStorage.removeItem("user");
   },
   async getAllUsers(){
     const res = await $api.get("/core/users");

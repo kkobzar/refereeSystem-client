@@ -1,6 +1,6 @@
 <template>
   <div id="login">
-    <form @submit.prevent="loginUser({email,password})">
+    <form @submit.prevent="login(email, password)">
       <label for="email">Email</label>
       <input v-model="email" id="email" name="email"/>
       <label for="password">Password</label>
@@ -14,6 +14,8 @@
 
 <script>
 import { mapActions } from "vuex";
+import store from "@/store";
+import router from "@/router";
 export default {
   name: "Login",
   data() {
@@ -22,11 +24,15 @@ export default {
       password: "",
       errors: "",
       loading: false,
-    }
+    };
   },
   methods: {
-    ...mapActions(['loginUser']),
-  }
+    ...mapActions(["loginUser"]),
+    login(email, password) {
+      store.dispatch("loginUser", { email, password });
+      router.go("Home");
+    },
+  },
 };
 </script>
 

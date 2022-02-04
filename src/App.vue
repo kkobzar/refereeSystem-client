@@ -1,18 +1,16 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <span>logged in: {{ isLogged }}</span> <br>{{userInfo}}
-    </div>
+    <navigation/>
     <router-view />
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import Navigation from "@/components/Navigation";
 // import Login from "@/components/Login";
 export default {
-  components: {},
+  components: { Navigation },
   name: "app",
   computed: {
     ...mapGetters(["isLogged", "userInfo"]),

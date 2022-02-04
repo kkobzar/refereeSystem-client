@@ -34,11 +34,10 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.authReq){
-    console.log(user);
     if (!user) {
       next({ name: "Login" });
     }
   }
   next();
-})
+});
 export default router;
