@@ -28,8 +28,8 @@ export default {
   },
   methods: {
     ...mapActions(["loginUser"]),
-    login(email, password) {
-      store.dispatch("loginUser", { email, password });
+    async login(email, password) {
+      await store.dispatch("loginUser", { email, password });
       router.go("Home");
     },
   },
