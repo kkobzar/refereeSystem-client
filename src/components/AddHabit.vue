@@ -27,9 +27,10 @@ export default {
   },
   methods: {
     async addHabit() {
-      let habitTitle = this.habitTitle;
-      let habitQuestion = this.habitQuestion;
-      await store.dispatch("addHabit",{ habitTitle, habitQuestion})
+      let title = this.habitTitle;
+      let question = this.habitQuestion;
+      await store.dispatch("addHabit",{ title, question})
+      await store.dispatch("getHabits")
     }
   }
 };
