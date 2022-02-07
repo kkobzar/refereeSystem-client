@@ -8,10 +8,6 @@
                  :title="habit.title"
                  :question="habit.question"
       />
-<!--      <li v-for="habit in userHabits" :key="habit.id">
-        <span>{{habit.title}}</span>
-        <p v-if="habit.question">{{habit.question}}</p>
-      </li>-->
     </ul>
   </div>
 </template>
@@ -28,7 +24,6 @@ export default {
   },
   async created() {
     await this.getHabits()
-    //this.habits = mapGetters(['getHabits'])
   },
   methods:{
     ...mapActions(['getHabits'])

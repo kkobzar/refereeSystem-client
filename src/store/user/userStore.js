@@ -16,6 +16,10 @@ export default {
     setUser(state, user) {
       state.user = user;
     },
+    logout(state){
+      state.isLogged = false;
+      state.user = {};
+    }
   },
   actions: {
     async loginUser({ commit }, { email, password }) {
@@ -43,6 +47,10 @@ export default {
         commit("login");
         commit("setUser", JSON.parse(localStorage.getItem("user")))
       }
+    },
+    async logoutUser({commit}){
+      await userService.logout()
+      commit("logout")
     }
   },
   getters: {

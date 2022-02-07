@@ -30,7 +30,7 @@ export default {
     ...mapActions(["loginUser"]),
     async login(email, password) {
       await store.dispatch("loginUser", { email, password });
-      router.go("Home");
+      await router.push({name:"Home"});
     },
   },
 };

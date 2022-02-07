@@ -9,8 +9,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import authService from "@/services/authService";
+import { mapGetters, mapActions } from "vuex";
 import router from "@/router";
 
 export default {
@@ -20,9 +19,10 @@ export default {
   },
   methods:{
     async logout(){
-      await authService.logout();
-      router.go("Login")
-    }
+      await this.logoutUser();
+      await router.push("/login")
+    },
+    ...mapActions(['logoutUser'])
   }
 };
 </script>
