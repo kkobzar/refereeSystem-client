@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "@/views/Login";
 import Registration from "@/views/RegistrationView";
+import store from "@/store";
 
 Vue.use(VueRouter);
 
@@ -33,7 +34,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.authReq && !localStorage.getItem("user")) {
+  if (to.meta.authReq && !store.getters.isLogged) {
     next({ name: "Login" });
   }
   next();
