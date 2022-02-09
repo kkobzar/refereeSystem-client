@@ -8,6 +8,9 @@ export default {
     addHabit(state, habit) {
       state.habits = habit;
     },
+    editHabit(state,habit){
+      state.habits[state.habits.findIndex(i=>i.id === habit.id)] = habit;
+    }
   },
   actions: {
     // eslint-disable-next-line no-empty-pattern
@@ -20,6 +23,11 @@ export default {
 
       commit("addHabit", res);
     },
+    async editHabit({commit}, {id,title,question}){
+      const res = await habitService.editHabit(id,title,question)
+      if (res)
+        commit('editHabit',res);
+    }
   },
   getters: {
     userHabits(state) {
