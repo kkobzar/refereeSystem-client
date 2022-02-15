@@ -10,13 +10,16 @@
       <input v-if="editQuestion" type="text" v-model="editQuestion" />
       <button @click.prevent="editHabitMethod">Save</button>
     </div>
+    <v-calendar></v-calendar>
   </li>
 </template>
 
 <script>
 import { mapActions } from "vuex";
+import VCalendar from 'v-calendar'
 export default {
   name: "HabitItem",
+  components: { VCalendar },
   props: {
     title: String,
     question: String,

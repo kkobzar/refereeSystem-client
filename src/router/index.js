@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Login from "@/views/Login";
 import Registration from "@/views/RegistrationView";
 import store from "@/store";
+import Habit from "@/views/Habit";
 
 Vue.use(VueRouter);
 
@@ -26,6 +27,11 @@ const routes = [
     name: "Registration",
     component: Registration,
   },
+  {
+    path: "/habit/:id",
+    name: "HabitInfo",
+    component: Habit
+  }
 ];
 
 const router = new VueRouter({
