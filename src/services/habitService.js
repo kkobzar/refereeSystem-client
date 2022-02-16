@@ -21,5 +21,14 @@ export default {
       return res.data;
     else
       return false;
+  },
+  async getHabitChecks(habitId){
+    const res = await $api.get("/core/userHabitChecks",{
+      habitId,
+    });
+    if (res.status === 200)
+      return res.data;
+    else
+      return false;
   }
 }

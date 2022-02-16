@@ -1,25 +1,24 @@
 <template>
   <li class="habit-item">
-    <div v-if="!edited" class="habit-item__info">
-      <p>{{ editTitle }}</p>
-      <p v-if="editQuestion">{{ editQuestion }}</p>
-      <button @click.prevent="edited = true">Edit</button>
-    </div>
-    <div v-if="edited" class="habit-item__edit">
-      <input type="text" v-model="editTitle" />
-      <input v-if="editQuestion" type="text" v-model="editQuestion" />
-      <button @click.prevent="editHabitMethod">Save</button>
-    </div>
-    <v-calendar></v-calendar>
+    <router-link :to="{name:'HabitInfo',params:{id:$vnode.key}}">
+      <div v-if="!edited" class="habit-item__info">
+        <p>{{ editTitle }}</p>
+        <p v-if="editQuestion">{{ editQuestion }}</p>
+        <button @click.prevent="edited = true">Edit</button>
+      </div>
+      <div v-if="edited" class="habit-item__edit">
+        <input type="text" v-model="editTitle" />
+        <input v-if="editQuestion" type="text" v-model="editQuestion" />
+        <button @click.prevent="editHabitMethod">Save</button>
+      </div>
+    </router-link>
   </li>
 </template>
 
 <script>
 import { mapActions } from "vuex";
-import VCalendar from 'v-calendar'
 export default {
   name: "HabitItem",
-  components: { VCalendar },
   props: {
     title: String,
     question: String,

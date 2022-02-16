@@ -30,7 +30,9 @@ const routes = [
   {
     path: "/habit/:id",
     name: "HabitInfo",
-    component: Habit
+    component: Habit,
+    meta: {authReq: true},
+    props: true,
   }
 ];
 
