@@ -1,6 +1,6 @@
 <template>
   <div id="habit-info">
-    <HabitInfo :id="habitId"/>
+    <HabitInfo :id="parseInt(habitId)"/>
   </div>
 </template>
 
