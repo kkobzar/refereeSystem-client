@@ -2,7 +2,6 @@ import habitService from "@/services/habitService";
 export default {
   state: {
     habits: [],
-    habitsChecks: {},
   },
   mutations: {
     addHabit(state, habit) {
