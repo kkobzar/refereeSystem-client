@@ -26,4 +26,11 @@ export default {
     if (res.status === 200) return res.data.map(i=>new Date(i.checkDate));
     else return false;
   },
+  async checkHabit(habitId,time){
+    const res = await $api.post("/core/toggleHabit",{
+      habitId,
+      date:time
+    });
+    return res.status === 200;
+  }
 };
