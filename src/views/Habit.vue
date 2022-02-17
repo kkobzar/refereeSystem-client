@@ -1,6 +1,6 @@
 <template>
   <div id="habit-info">
-    <HabitInfo :id="parseInt(habitId)"/>
+    <HabitInfo :id="parseInt(habitId)" :title="getHabit.title"/>
   </div>
 </template>
 
@@ -8,12 +8,19 @@
 //import router from "@/router";
 
 import HabitInfo from "@/components/Habits/HabitInfo";
+import { mapGetters } from "vuex";
 export default {
   name: "Habit",
   components: { HabitInfo },
   data(){
     return{
       habitId: this.$route.params.id
+    }
+  },
+  computed:{
+    ...mapGetters(["userHabits"]),
+    getHabit(){
+      return this.userHabits.find(i=>i.id === this.habitId)
     }
   }
 };

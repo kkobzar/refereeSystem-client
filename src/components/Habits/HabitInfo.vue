@@ -1,11 +1,13 @@
 <template>
   <section id="habit-info">
     <a @click="$router.go(-1)">Back</a>
+    <h2 class="habit-title">{{title}}</h2>
     <v-date-picker
+      ref="datePicker-ref"
       @input="setHabitCheck"
       mode="date"
       :fillMode="false"
-      v-model="checkedDate"
+      :value="checkedDate"
       v-if="loaded"
       :attributes="habitsChecks"
       :select-attribute="selectAttr"
@@ -20,23 +22,25 @@ export default {
   name: "HabitInfo",
   props: {
     id: Number,
+    title:String,
   },
   data() {
     return {
       habitsChecks: [],
       loaded: false,
       error: false,
-      checkedDate: null,
+      checkedDate: new Date(),
       selectAttr: {
         highlight: {
-          fillMode: "none",
           color: "purple",
-        },
-        contentStyle: {
-          color: "grey",
         },
       },
     };
+  },
+  computed: {
+    selectedDate() {
+      return this.checkedDate;
+    },
   },
   async created() {
     let hChecks = await habitService.getHabitChecks(this.$props.id);
@@ -51,25 +55,29 @@ export default {
     this.loaded = true;
   },
   methods: {
-    async setHabitCheck() {
-      if (
-        await habitService.checkHabit(
-          this.$props.id,
-          this.checkedDate.getTime()
-        )
-      ) {
-        let hChecks = await habitService.getHabitChecks(this.$props.id);
-        this.habitsChecks = [
-          {
-            highlight: {
-              color: "purple",
-              fillMode: "outline",
+    async setHabitCheck(d) {
+      const setCheck = async (d) => {
+        if (await habitService.checkHabit(this.$props.id, d.getTime())) {
+          let hChecks = await habitService.getHabitChecks(this.$props.id);
+          this.habitsChecks = [
+            {
+              highlight: {
+                color: "purple",
+                fillMode: "outline",
+              },
+              dates: hChecks,
             },
-            dates: hChecks,
-          },
-        ];
-      } else {
-        this.error = "Can't check habit";
+          ];
+        } else {
+          this.error = "Can't check habit";
+        }
+      };
+      try {
+        await setCheck(d);
+      } catch (e) {
+        this.checkedDate = new Date();
+        this.$refs["datePicker-ref"].$el.input();
+        await setCheck(d);
       }
     },
   },
