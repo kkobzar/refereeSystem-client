@@ -5,8 +5,6 @@
 </template>
 
 <script>
-//import router from "@/router";
-
 import HabitInfo from "@/components/Habits/HabitInfo";
 import { mapGetters } from "vuex";
 export default {
