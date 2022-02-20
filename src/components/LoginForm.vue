@@ -1,11 +1,17 @@
 <template>
   <div id="login">
     <form @submit.prevent="login(email, password)">
-      <label for="email">Email</label>
-      <input v-model="email" id="email" name="email"/>
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" v-model="password" />
-      <input type="submit" value="Login">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input v-model="email" id="email" name="email"/>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" v-model="password" />
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Login">
+      </div>
     </form>
     <div v-if="errors" class="errors">{{ errors }}</div>
     <router-link to="registration">Registration</router-link>

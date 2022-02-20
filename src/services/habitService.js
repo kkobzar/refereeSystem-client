@@ -22,7 +22,6 @@ export default {
   },
   async getHabitChecks(habitId) {
     const res = await $api.get("/core/userHabitChecks/" + habitId);
-    console.log(res.data.map(i=>new Date(i.checkDate)))
     if (res.status === 200) return res.data.map(i=>new Date(i.checkDate));
     else return false;
   },
